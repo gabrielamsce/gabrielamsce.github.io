@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriela MSCE - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 id="name">Gabriela MSCE</h1>
+        <p class="animated-text">Web Developer | Creative Coder</p>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>
+            Hi! I'm Gabriela, passionate about web development and creating interactive experiences. Welcome to my animated portfolio!
+        </p>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skill">
+            <span>HTML</span>
+            <div class="progress-bar"><div class="progress" data-value="90"></div></div>
+        </div>
+        <div class="skill">
+            <span>CSS</span>
+            <div class="progress-bar"><div class="progress" data-value="80"></div></div>
+        </div>
+        <div class="skill">
+            <span>JavaScript</span>
+            <div class="progress-bar"><div class="progress" data-value="75"></div></div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-list">
+            <div class="project-card">
+                <h3>Personal Blog</h3>
+                <p>A modern responsive blog platform built with HTML, CSS, and JS.</p>
+            </div>
+            <div class="project-card">
+                <h3>Shell Scripts</h3>
+                <p>Useful automation scripts for daily tasks.</p>
+            </div>
+            <div class="project-card">
+                <h3>Portfolio Website</h3>
+                <p>This animated portfolio website!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <button id="contactBtn" class="animated-btn">Get In Touch</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Gabriela MSCE</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
