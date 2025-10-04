@@ -3,64 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriela MSCE - Portfolio</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Gabriel Prasena Raj - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --secondary: #666666;
+            --accent: #0066cc;
+            --border: #e0e0e0;
+            --card-bg: #f8f9fa;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0a0a0a;
+            --text: #e0e0e0;
+            --secondary: #a0a0a0;
+            --accent: #4a9eff;
+            --border: #2a2a2a;
+            --card-bg: #151515;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        header {
+            padding: 3rem 0;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--secondary);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .contact-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+
+        section {
+            margin: 4rem 0;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--text);
+        }
+
+        .card .meta {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding-left: 1.2rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            header {
+                padding: 2rem 0;
+            }
+
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+                width: 45px;
+                height: 45px;
+            }
+
+            section {
+                margin: 3rem 0;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        .education-list, .cert-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .simple-card {
+            background: var(--card-bg);
+            border-left: 3px solid var(--accent);
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+        }
+
+        .simple-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .simple-card .meta {
+            color: var(--secondary);
+            font-size: 0.85rem;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1 id="name">Gabriela MSCE</h1>
-        <p class="animated-text">Web Developer | Creative Coder</p>
-    </header>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span id="theme-icon">🌙</span>
+    </button>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>
-            Hi! I'm Gabriela, passionate about web development and creating interactive experiences. Welcome to my animated portfolio!
-        </p>
-    </section>
-
-    <section id="skills">
-        <h2>Skills</h2>
-        <div class="skill">
-            <span>HTML</span>
-            <div class="progress-bar"><div class="progress" data-value="90"></div></div>
-        </div>
-        <div class="skill">
-            <span>CSS</span>
-            <div class="progress-bar"><div class="progress" data-value="80"></div></div>
-        </div>
-        <div class="skill">
-            <span>JavaScript</span>
-            <div class="progress-bar"><div class="progress" data-value="75"></div></div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project-list">
-            <div class="project-card">
-                <h3>Personal Blog</h3>
-                <p>A modern responsive blog platform built with HTML, CSS, and JS.</p>
+    <div class="container">
+        <header>
+            <h1>Gabriel Prasena Raj</h1>
+            <p class="subtitle">XR Developer | AI/ML Enthusiast | Learning Facilitator</p>
+            <div class="contact-links">
+                <a href="mailto:gabrielrajofficial@gmail.com">📧 Email</a>
+                <a href="tel:+919419339434">📱 +91 9419339434</a>
+                <a href="https://github.com/realwixi">💻 GitHub</a>
+                <a href="https://www.linkedin.com/in/%D0%B3%D0%B0%D0%B1%D1%80%D0%B8%D1%8D%D0%BB%D1%8C-%D0%BF%D1%80%D0%B0%D1%81%D0%B5%D0%BD%D0%B0-%D1%80%D0%B0%D0%B4%D0%B6-89b5a1250/">🔗 LinkedIn</a>
+                <a href="https://medium.com/@realwixi">📝Medium</a>
+                
             </div>
-            <div class="project-card">
-                <h3>Shell Scripts</h3>
-                <p>Useful automation scripts for daily tasks.</p>
-            </div>
-            <div class="project-card">
-                <h3>Portfolio Website</h3>
-                <p>This animated portfolio website!</p>
-            </div>
-        </div>
-    </section>
+        </header>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <button id="contactBtn" class="animated-btn">Get In Touch</button>
-    </section>
+        <section id="about">
+            <h2>About</h2>
+            <div class="card">
+                <p>Computer Science student passionate about Extended Reality (XR), Artificial Intelligence, and Machine Learning. Currently pursuing Bachelor of Engineering at Aalim Muhammed Salegh College of Engineering, with hands-on experience in Unity development, AI/ML projects, and community education initiatives.</p>
+            </div>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 Gabriela MSCE</p>
-    </footer>
-    <script src="/script.js"></script>
+        <section id="experience">
+            <h2>Experience</h2>
+            
+            <div class="card">
+                <h3>XR AI ML Intern</h3>
+                <div class="meta">E16 AI XR Technology Pvt Ltd | Jul 2025 - Sep 2025</div>
+                <ul>
+                    <li>Worked on CAMRING (Fuel Injector) Profile AI ML project</li>
+                    <li>Setup Nvidia Jetson Nano</li>
+                    <li>Learning Facilitator for Unity AR/VR course</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Learning Facilitator</h3>
+                <div class="meta">Arthevia | Jan 2023 - Present | Hybrid</div>
+                <ul>
+                    <li>Facilitated learning sessions and educational workshops</li>
+                    <li>Created teaching and learning environment</li>
+                    <li>Taught Python to freshers</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Project Intern - Outlier</h3>
+                <div class="meta">Oct 2024 - Dec 2024</div>
+                <ul>
+                    <li>Learned how to train AI models effectively</li>
+                    <li>Gained expertise in Large Language Models (LLM) and prompt engineering</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Intern - Brainvalley Solutions</h3>
+                <div class="meta">Aug 2023 - Jan 2024 | Remote</div>
+                <ul>
+                    <li>Completed training on fullstack web development</li>
+                    <li>Worked with HTML5, CSS, and related web technologies</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="education-list">
+                <div class="simple-card">
+                    <h3>Bachelor of Engineering - Computer Science</h3>
+                    <div class="meta">Aalim Muhammed Salegh College of Engineering | 2022 - 2026</div>
+                </div>
+                <div class="simple-card">
+                    <h3>Higher Secondary Certificate (HSC)</h3>
+                    <div class="meta">Burn Hall School | CGPA: 8.2</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Publications & Projects</h2>
+            
+            <div class="card">
+                <h3>Development of an Augmented Reality Application for Anatomical Education</h3>
+                <div class="meta">Academia | May 2025</div>
+                <ul>
+                    <li>Developed a basic human organ application using augmented reality in Unity</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Smartphone-Based Interaction Methods in Cardboard VR</h3>
+                <div class="meta">Academia | Feb 2025</div>
+                <ul>
+                    <li>Course project focused on virtual reality interaction techniques</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="volunteering">
+            <h2>Volunteering</h2>
+            
+            <div class="card">
+                <h3>Co-Founder - Thozhilali Economic Empowerment</h3>
+                <div class="meta">Jan 2024 - Present</div>
+                <ul>
+                    <li>Connecting local blue collar workers with clients and providing technical support</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Student Volunteer - The Institution of Green Engineers</h3>
+                <div class="meta">Mar 2025 - Present</div>
+                <ul>
+                    <li>Raising awareness on environmental issues</li>
+                    <li>Elevated as Student Organizer of IGEN ENERGATHON 2025</li>
+                    <li>Best Organizer Award, Asia Book of Records</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-tag">Python Programming</div>
+                <div class="skill-tag">Virtual Reality (VR)</div>
+                <div class="skill-tag">Augmented Reality (AR)</div>
+                <div class="skill-tag">Large Language Models</div>
+                <div class="skill-tag">Prompt Engineering</div>
+                <div class="skill-tag">HTML5 & CSS</div>
+                <div class="skill-tag">C# & Unity</div>
+                <div class="skill-tag">AWS Cloud Services</div>
+                <div class="skill-tag">Web Development</div>
+                <div class="skill-tag">Design Thinking</div>
+                <div class="skill-tag">Project Management</div>
+                <div class="skill-tag">UI Design</div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="cert-list">
+                <div class="simple-card">
+                    <h3>IBM watsonx.ai Technical Essentials</h3>
+                    <div class="meta">IBM | Mar 2025</div>
+                </div>
+                <div class="simple-card">
+                    <h3>Mastering VR</h3>
+                    <div class="meta">CODE IIT Madras | Jan 2025</div>
+                </div>
+                <div class="simple-card">
+                    <h3>AWS Cloud Foundations & Cloud Essentials</h3>
+                    <div class="meta">Amazon Web Services | Nov 2024</div>
+                </div>
+                <div class="simple-card">
+                    <h3>Creators of Metaverse</h3>
+                    <div class="meta">AICTE | Jan 2023 - Jan 2024</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                html.removeAttribute('data-theme');
+                icon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                icon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.getElementById('theme-icon').textContent = '☀️';
+        }
+    </script>
 </body>
 </html>
